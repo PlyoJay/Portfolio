@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8", name="viewport" content="width=device-width, initial-scale=1">
+    <title>BBQ_redesign</title>
+    <style>
+        @font-face
+            {
+            font-family: 'SUIT-Medium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Medium.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            }
+
+        body
+            {
+            margin: 0;
+            }
+
+        span, div, button
+            {
+            font-family: 'SUIT-Medium';
+            }
+
+        a
+            {
+            text-decoration: none;
+            color: black;
+            }
+
+        #root
+            {
+            position: relative;
+            width: 100%; height: 100vh;
+            overflow: hidden;
+            }
+
+
+
+        #logo
+            {
+            position: fixed;
+            display: flex;
+            width: 150px; height: 60px;
+            z-index: 510;
+            left: 50%; transform: translateX(-50%); top: 2%;
+            }
+        #logo img
+            {
+            max-width: 100%;
+            }
+
+        #menu_icon
+            {
+            position: fixed;
+            max-width: 100%;
+            right: 2%; top: 2%; z-index: 510;
+            cursor: pointer;
+            }
+        #bar1, #bar2, #bar3
+            {
+            width: 35px; height: 5px;
+            background-color: #c70a2f;
+            border-radius: 5px;
+            margin: 6px 0;
+            transition: 0.4s;
+            }
+        .change #bar1
+            {
+            -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+            transform: rotate(-45deg) translate(-9px, 6px);
+            }
+        .change #bar2
+            {
+            opacity: 0;
+            }
+        .change #bar3
+            {
+            -webkit-transform: rotate(45deg) translate(-8px, -8px);
+            transform: rotate(45deg) translate(-8px, -8px);
+            }
+
+        #menuBar
+            {
+            position: fixed;
+            width: 300px; height: 100%; z-index: 10;
+            right: -300px;
+            background: rgb(246, 197, 88);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.7);
+            transition: right 1.5s;
+            }
+        #setting
+            {
+            position: absolute;
+            width: 35px;
+            right: 30%; top: 2.5%;
+            }
+
+        .buttons
+            {
+            position: absolute;
+            width: 40%; height: 5%;
+            border-radius: 10px;
+            font-size: 20px; font-family: 'SUIT-Medium';
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            }
+        .buttons:active
+            {
+            box-shadow: inset 5px 5px 10px rgba(0,0,0,0.5);
+            }
+        #Login
+            {
+            left: 7.5%; top: 7.5%;
+            background: red;
+            }
+        #Signin
+            {
+            left: 52.5%; top: 7.5%;
+            background: rgb(60, 60, 60);
+            }
+
+        #menus
+            {
+            position: absolute;
+            width: 100%; height: 42%;
+            top: 15%;
+            border-top: 1px solid rgb(100, 100, 100);
+            }
+        #menus div
+            {
+            position: relative;
+            width: 100%; height: 16.5%;
+            border-bottom: 1px solid rgb(180, 180, 180);
+            }
+        .menu_img
+            {
+            position: absolute;
+            width: 20%; height: 70%;
+            left: 5%; top: 15%;
+            }
+        #menus span
+            {
+            position: absolute;
+            left: 35%; top: 50%;
+            transform: translateY(-50%);
+            font-size: 25px;
+            }
+
+        #phoneCall
+            {
+            position: absolute;
+            width: 100%; height: 10%;
+            top: 57%;
+            background: red; color: white;
+            font-size: 25px;
+            }
+        #phoneCall img
+            {
+            position: absolute;
+            height: 70%;
+            left: 5%; top: 15%;
+            }
+        #phoneCall span
+            {
+            position: absolute;
+            left: 40%; top: 50%;
+            transform: translateY(-50%);
+            }
+
+        #info
+            {
+            position: absolute;
+            top: 67.5%;
+            font-size: 13px;
+            }
+        #info1, #info3
+            {
+            font-size: 20px;
+            }
+        #info4
+            {
+            font-size: 12px;
+            }
+
+
+
+        #intro
+            {
+            position: relative;
+            display: flex;
+            width: 100%; height: 100vh;
+            background: #ffffb4;
+            }
+
+        #intro_ani
+            {
+            position: absolute;
+            width: 50%; height: 80%;
+            left: 5%; top: 10%;
+            background: url("https://img.freepik.com/premium-photo/wooden-table-background_565359-11.jpg");
+            background-repeat: no-repeat; background-size : cover;
+            border-radius: 25px;
+            box-shadow: inset 5px 7px 10px 2px rgba(0,0,0,0.4);
+            }
+
+        #Golden
+            {
+            position: absolute;
+            width: 30%;
+            left: 30%; top: 5%;
+            opacity: 0;
+            transition: opacity 1s;
+            }
+        #Spicy
+            {
+            position: absolute;
+            width: 30%;
+            left: 10%; top: 50%;
+            opacity: 0;
+            transition: opacity 1s;
+            }
+        #Grilled
+            {
+            position: absolute;
+            width: 35%;
+            left: 60%; top: 30%;
+            opacity: 0;
+            transition: opacity 1s;
+            }
+
+        #event
+            {
+            display: flex;
+            width: 38%; height: 40%;
+            margin: 100px 5% 0 auto;
+            border-radius: 25px;
+            }
+
+        #notice
+            {
+            position: absolute;
+            display: flex;
+            width: 38%; height: 35%;
+            right: 5%; top: 55%;
+            background: #dcdcdc;
+            border-radius: 25px;
+            box-shadow: inset 5px 7px 10px 2px rgba(0,0,0,0.4);
+            }
+        #noticeT
+            {
+            position: absolute;
+            left: 5%; top: 10%;
+            font-size: 30px;
+            letter-spacing: 5px;
+            }
+        #noticeC
+            {
+            position: absolute;
+            width: 90%; height: 50%;
+            left: 5%; top: 30%;
+            overflow: hidden;
+            }
+        .posts
+            {
+            position: absolute;
+            width: 100%;
+            font-size: 18px;
+            transition: top 1s;
+            }
+        #noticeC span
+            {
+            position: absolute;
+            right: 0;
+            font-size: 16px;
+            }
+
+
+
+        #MENU_PG
+            {
+            position: relative;
+            display: flex;
+            width: 100%; height: 100vh;
+            background: #ffffb4;
+            }
+
+        #MENU_BAR
+            {
+            position: absolute;
+            display: flex;
+            left: 5%; top: 10%;
+            width: 90%;
+            justify-content: center;
+            }
+        #menu_list
+            {
+            margin: 0 auto 0 auto;
+            width: 100%;
+            }
+        #menu_list li
+            {
+            float: left;
+            list-style-type: none;
+            font-size: 25px;
+            width: 16%; text-align: center;
+            border-radius: 15px 15px 0 0;
+            }
+        #menu_list li:hover
+            {
+            background: white;
+            color: #f0aa0a;
+            box-shadow: 5px 7px 10px 2px rgba(0,0,0,0.4);
+            }
+        .contents
+            {
+            position: absolute;
+            opacity: 0;
+            width: 100%; height: 0;
+            left: 0; top: 101%; z-index: 5;
+            background: white;
+            box-shadow: 5px 10px 5px 2px rgba(0,0,0,0.4);
+            border-radius: 25px;
+            transition: height 1s;
+            }
+        #menu_list li:hover .contents
+            {
+            height: 2300%;
+            opacity: 1;
+            }
+        #menu_list li:hover .NEW
+            {
+            display: block;
+            }
+
+        #menu_img
+            {
+            position: absolute;
+            width: 40%; height: 45%;
+            left: 50%; top: 30%;
+            transform: translateX(-50%);
+            border: 3px solid black;
+            border-radius: 10px;
+            box-shadow: 5px 2px 5px 2px rgba(0,0,0,0.4);
+            }
+
+        .NEW
+            {
+            position: absolute;
+            display: none;
+            width: 17.5%; left: 5%; z-index: 10;
+            height: 70%;
+            top: 50%; transform: translateY(-50%);
+            }
+        .NEW img
+            {
+            max-width: 100%;
+            }
+        .NEW span
+            {
+            display: block;
+            text-align: left;
+            color: black;
+            }
+        .Exp
+            {
+            font-size: 15px;
+            }
+        .price
+            {
+            margin-top: 5%;
+            font-size: 25px;
+            }
+
+        #Order_btn
+            {
+            position: absolute;
+            display: flex;
+            width: 15%; height: 5%;
+            left: 50%; top: 80%; z-index: 3;
+            transform: translateX(-50%);
+            background: white;
+            text-align: center; justify-content: center; align-items: center;
+            font-size: 20px; color: #c70a2f;
+            border: 3px solid #c70a2f;
+            border-radius: 50px;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+            transition: top 1s;
+            }
+        #Order_btn:active
+            {
+            filter: brightness(80%);
+            box-shadow: inset 5px 5px 10px rgba(0,0,0,0.5);
+            }
+        #order
+            {
+            position: absolute;
+            width: 100%; height: 40%; z-index: 2;
+            top: 60%;
+            background: white;
+            border-top: 3px solid #c70a2f;
+            transform: scale(0, 0);
+            transform-origin: 50% 0;
+            transition: transform 1.5s;
+            }
+        #delivery, #ToGo, #coupon, #gift
+            {
+            position: absolute;
+            width: 15%; height: 60%; z-index: 2;
+            top: 20%;
+            font-size: 20px;
+            text-align: center;
+            transition: top 1.5s;
+            }
+        #delivery
+            {
+            left: 5%;
+            background: url("https://m.bbq.co.kr/images/main_new/icon_m_order_new.png") no-repeat;
+            background-size : 100% 80%;
+            border-right: 1px solid #d2d2d2;
+            }
+        #ToGo
+            {
+            left: 20%;
+            background: url("https://m.bbq.co.kr/images/main_new/icon_m_out_new.png") no-repeat;
+            background-size : 100% 80%;
+            border-left: 1px solid #d2d2d2;
+            }
+        #coupon
+            {
+            right: 20%;
+            background: url("https://m.bbq.co.kr/images/main_new/icon_m_coupon_new.png") no-repeat;
+            background-size : 100% 80%;
+            border-right: 1px solid #d2d2d2;
+            }
+        #gift
+            {
+            right: 5%;
+            background: url("https://m.bbq.co.kr/images/main_new/icon_m_gift_new.png") no-repeat;
+            background-size : 100% 80%;
+            border-left: 1px solid #d2d2d2;
+            }
+        #delivery span, #ToGo span, #coupon span, #gift span
+            {
+            position: absolute;
+            left: 50%; bottom: 10%;
+            transform: translateX(-50%);
+            }
+        #coupon span
+            {
+            left: 35%; bottom: 10%;
+            transform: translateX(-35%);
+            }
+        #delivery_c, #ToGo_c, #coupon_c
+            {
+            position: absolute;
+            width: 15%; height: 45%;
+            top: 20%;
+            box-shadow: inset 5px 5px 10px rgba(0,0,0,0.5);
+            }
+        #delivery_c
+            {
+            left: 5%;
+            }
+        #ToGo_c
+            {
+            left: 20%;
+            }
+        #coupon_c
+            {
+            right: 20%;
+            font-size: 23px;
+            }
+        #coupon_c span
+            {
+            position: absolute;
+            display: block;
+            width: 70%; left: 15%; top: 10%;
+            text-align: center;
+            }
+        input[type=text]
+            {
+            position: absolute;
+            width: 90%; height: 10%;
+            border-radius: 10px;
+            box-shadow: inset 1px 1px 10px rgba(0,0,0,0.5);
+            }
+        .address
+            {
+            left: 5%; top: 10%;
+            }
+        .gps
+            {
+            left: 5%; top: 30%;
+            }
+        #coupon_c input[type=text]
+            {
+            height: 15%; top: 45%;
+            width: 80%; left: 10%;
+            }
+        #coupon_c button
+            {
+            position: absolute;
+            height: 15%; top: 65%;
+            width: 20%; left: 40%;
+            border-radius: 10px;
+            background: #c70a2f; color: white;
+            }
+        #coupon_c button:active
+            {
+            filter: brightness(80%);
+            }
+
+        #Top10
+            {
+            position: absolute;
+            width: 25%; height: 10%;
+            left: 50%; top: 15%;
+            transform: translateX(-50%);
+            border: 1px solid #d2d2d2; border-radius: 20px;
+            overflow: hidden;
+            box-shadow: inset 5px 5px 10px rgba(0,0,0,0.5);
+            }
+        #popular
+            {
+            display: flex;
+            width: 30%; height: 100%;
+            text-align: center; justify-content: center; align-items: center;
+            background: #c70a2f; color: white;
+            }
+        .chart
+            {
+            position: absolute;
+            display: flex;
+            list-style-type: none;
+            width: 70%; height: 100%;
+            left: 30%;
+            text-align: center; justify-content: center; align-items: center;
+            transition: top 1.5s;
+            }
+
+        #Pts
+            {
+            position: absolute;
+            width: 25%; height: 10%;
+            left: 50%; top: 40%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            }
+        #Pts div
+            {
+            position: absolute;
+            display: flex;
+            width: 50%; height: 100%;
+            padding-left: 5%;
+            justify-content: left; align-items: center;
+            }
+        #certificate
+            {
+            border-left: 1px solid #d2d2d2;
+            left: 50%;
+            }
+        #Pts span
+            {
+            position: absolute;
+            right: 15%;
+            }
+
+        #etc
+            {
+            position: absolute;
+            width: 25%; height: 30%;
+            left: 50%; top: 55%;
+            transform: translateX(-50%);
+            }
+        .etc
+            {
+            display: inline-block;
+            width: 32.5%; height: 100%;
+            border-right: 1px solid #d2d2d2;
+            }
+        .etc:last-child
+            {
+            border: none;
+            }
+        .etc img
+            {
+            width: 100%;
+            }
+
+
+
+        #footer
+            {
+            position: relative;
+            display: flex;
+            width: 100%; height: 20vh;
+            background: #c8c8c8;
+            }
+        #left
+            {
+            position: absolute;
+            font-size: 15px;
+            left: 15%; top: 50%;
+            transform: translateY(-50%);
+            }
+        #left span, #right span
+            {
+            font-weight: bold;
+            }
+        #right
+            {
+            position: absolute;
+            font-size: 15px;
+            right: 15%; top: 50%;
+            transform: translateY(-50%);
+            }
+
+
+
+
+
+        @media (max-width : 800px)
+            {
+            #logo
+                {
+                height: 5%
+                }
+            #menu_icon
+                {
+                right: 5%;
+                }
+
+            #intro
+                {
+                height: 150vh;
+                }
+
+            #intro_ani
+                {
+                width: 100%; height: 30%;
+                left: 0%; top: 5%;
+                }
+            #Golden
+                {
+                width: 30%;
+                left: 30%; top: 0%;
+                }
+            #Spicy
+                {
+                width: 30%;
+                left: 10%; top: 45%;
+                }
+            #Grilled
+                {
+                width: 35%;
+                left: 60%; top: 25%;
+                }
+
+            #event
+                {
+                width:100%; height: 30%;
+                margin: 70% auto 0 0;
+                }
+
+            #notice
+                {
+                width: 100%; height: 30%;
+                right: 0; top: 70%;
+                background: #dcdcdc;
+                border-radius: 25px;
+                }
+            #noticeC
+                {
+                width: 90%; height: 50%;
+                }
+            .posts
+                {
+                font-size: 20px;
+                }
+
+            #MENU_BAR
+                {
+                width: 100%;
+                left: 0; top: 7.5%;
+                }
+            #menu_list
+                {
+                margin: 0;
+                width: 100%;
+                }
+            #menu_list li
+                {
+                font-size: 20px;
+                }
+            #menu_img
+                {
+                width: 60%;
+                }
+            #menu_list li:hover .contents
+                {
+                height: 3600%;
+                }
+            .NEW
+                {
+                width: 35%; height: 40%;
+                }
+
+            #Order_btn
+                {
+                width: 30%;
+                transition: top 2s;
+                }
+            #order
+                {
+                height: 82.5%; top: 17.5%;
+                }
+            #Top10
+                {
+                width: 50%; height: 5%;
+                top: 5%;
+                }
+            #delivery, #ToGo, #coupon, #gift
+                {
+                width: 45%; height: 30%;
+                top: 15%; border: none;
+                }
+            #ToGo
+                {
+                left: 50%;
+                }
+            #coupon
+                {
+                left: 5%; top: 45%;
+                }
+            #gift
+                {
+                top: 45%;
+                }
+            #coupon span
+                {
+                left: 50%;
+                transform: translateX(-50%);
+                }
+            #delivery_c, #ToGo_c, #coupon_c
+                {
+                width: 45%; height: 22.5%;
+                top: 15%;
+                }
+            #delivery_c
+                {
+                left: 5%;
+                }
+            #ToGo_c
+                {
+                left: 50%;
+                }
+            #coupon_c
+                {
+                top: 45%;
+                right: 50%;
+                }
+
+            #Pts
+                {
+                height: 15%; top: 80%;
+                transform: translateX(0);
+                width: 50%;
+                }
+
+            #etc
+                {
+                width: 50%; height: 15%;
+                top: 80%; left: 0;
+                transform: translateX(0);
+                }
+            .etc
+                {
+
+                }
+
+
+            #left
+                {
+                font-size: 12px;
+                left: 50%; top: 40%;
+                width: 80%;
+                transform: translate(-50%, 0);
+                }
+            #right
+                {
+                left: 10%; top: 5%;
+                transform: translate(0, 0);
+                font-size: 12px;
+                }
+            }
+
+    </style>
+</head>
+<body>
+    <header id="logo">
+        <img src="https://ifh.cc/g/Axz8Rj.png">
+    </header>
+    <nav id="menu_icon" onclick="menuIcon(this)">
+        <div id="bar1" class="bar"></div>
+        <div id="bar2" class="bar"></div>
+        <div id="bar3" class="bar"></div>
+    </nav>
+    <nav id="menuBar">
+        <img id="setting" src="https://m.bbq.co.kr/images/common/icon_set.png">
+        <button type="button" id="Login" class="buttons">로그인</button>
+        <button type="button" id="Signin" class="buttons">회원가입</button>
+        <div id="menus">
+            <div>
+                <img class="menu_img" src="https://m.bbq.co.kr/images/common/icon_menu1.png">
+                <span>비회원 주문 조회</span>
+            </div>
+            <div>
+                <img class="menu_img" src="https://m.bbq.co.kr/images/common/icon_menu2.png">
+                <span>쿠폰 등록 / 보관</span>
+            </div>
+            <div>
+                <img class="menu_img" src="https://m.bbq.co.kr/images/common/icon_menu3.png">
+                <span>브랜드</span>
+            </div>
+            <div>
+                <img class="menu_img" src="https://m.bbq.co.kr/images/common/icon_menu4.png">
+                <span>브랜드 스토리</span>
+            </div>
+            <div>
+                <img class="menu_img" src="https://m.bbq.co.kr/images/common/icon_menu5.png">
+                <span>고객센터</span>
+            </div>
+            <div style="border-bottom: none">
+                <img class="menu_img" src="https://m.bbq.co.kr/images/common/icon_menu6.png">
+                <span>창업 정보</span>
+            </div>
+        </div>
+        <div id="phoneCall">
+            <img src="https://m.bbq.co.kr/images/common/icon_phoneOrder.png">
+            <span>
+                전화 주문<br>1588 - 9282
+            </span>
+        </div>
+    </nav>
+
+    <section id="intro">
+        <div id="intro_ani">
+            <img id="Golden" src="https://ifh.cc/g/wpRH5a.png">
+            <img id="Spicy" src="https://ifh.cc/g/maQf3B.png">
+            <img id="Grilled" src="https://ifh.cc/g/tVfCJ2.png">
+        </div>
+        <img id="event" src="https://img.bbq.co.kr:449/uploads/bbq_d/main/자사앱배너(39).png">
+        <div id="notice">
+            <span id="noticeT"><a href="https://www.bbq.co.kr/brand/noticeList.asp">공지사항</a></span>
+            <div id="noticeC">
+                <div class="posts">올리브토큰(OLV)”의 불법성과 관련한 고지<span>2022-05-18</span></div>
+                <div class="posts">카이카스 지갑 생성 방법<span>2022-02-03</span></div>
+                <div class="posts">제너시스 BBQ, 끊임없는 혁신 통해 2022년을 Re:Start BBQ의 원년으로<span>2022-01-07</span></div>
+                <div class="posts">BBQ, 2021 하반기 공채 31명 채용<span>2022-01-05</span></div>
+                <div class="posts">BBQ, 지역사회 상생 위해 연말맞이 따뜻한 나눔 실천<span>2021-12-30</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="MENU_PG">
+        <div id="MENU_BAR">
+            <ul id="menu_list">
+                <li><a href="">신 메뉴</a>
+                    <div class="contents">
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220317_BBQ_3%EC%9B%94_%EC%8B%A0%EC%A0%9C%ED%92%88_%EC%9E%90%EC%82%AC%EC%95%B1_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px).png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보</span>
+                            <span class="Exp">입안 가득히 퍼지는 고소하고 쫄깃한 식감과 치킨의 최고 맛있는 닭다리와 윙,봉을 함께 즐길 수 있는 메뉴</span>
+                            <span class="price">24,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%ED%81%AC%EB%9F%B0%EC%B9%98%EB%B2%84%ED%84%B0%EC%B9%98%ED%82%A8.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 <br>크런치 버터</span>
+                            <span class="Exp">달콤 짭짤한 버터향의 풍미와 핫하게 착 감기는 레드착착 시즈닝의 중독성 강한 크런치 버터 치킨을 닭다리와 윙, 봉으로 즐길 수 있는 콤보 메뉴</span>
+                            <span class="price">25,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%EB%B0%98%EB%B0%98.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 반반</span>
+                            <span class="Exp">BBQ 시크릿 양념소스와 바삭한 황금올리브치킨™ 2가지의 맛을 닭다리와 윙, 봉으로 한번에 느낄 수 있는 BBQ만의 반반 콤보 메뉴</span>
+                            <span class="price">25,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%EC%98%A4%EB%A6%AC%EC%A7%80%EB%82%A0%EC%96%91%EB%85%90%EC%B9%98%ED%82%A8.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 양념</span>
+                            <span class="Exp">고추장, 양파, 마늘 등을 넣은 K-Food 특제 양념 소스와 블루치즈로 후레쉬한 풍미를 더해 고급스럽게 구현한 BBQ만의 양념치킨을 닭다리와 윙, 봉으로 즐길 수 있는 콤보 메뉴</span>
+                            <span class="price">25,500원</span>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="">세트 메뉴</a>
+                    <div class="contents">
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220317_BBQ_3%EC%9B%94_%EC%8B%A0%EC%A0%9C%ED%92%88_%EC%9E%90%EC%82%AC%EC%95%B1_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px).png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보</span>
+                            <span class="Exp">입안 가득히 퍼지는 고소하고 쫄깃한 식감과 치킨의 최고 맛있는 닭다리와 윙,봉을 함께 즐길 수 있는 메뉴</span>
+                            <span class="price">24,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%ED%81%AC%EB%9F%B0%EC%B9%98%EB%B2%84%ED%84%B0%EC%B9%98%ED%82%A8.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 <br>크런치 버터</span>
+                            <span class="Exp">달콤 짭짤한 버터향의 풍미와 핫하게 착 감기는 레드착착 시즈닝의 중독성 강한 크런치 버터 치킨을 닭다리와 윙, 봉으로 즐길 수 있는 콤보 메뉴</span>
+                            <span class="price">25,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%EB%B0%98%EB%B0%98.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 반반</span>
+                            <span class="Exp">BBQ 시크릿 양념소스와 바삭한 황금올리브치킨™ 2가지의 맛을 닭다리와 윙, 봉으로 한번에 느낄 수 있는 BBQ만의 반반 콤보 메뉴</span>
+                            <span class="price">25,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%EC%98%A4%EB%A6%AC%EC%A7%80%EB%82%A0%EC%96%91%EB%85%90%EC%B9%98%ED%82%A8.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 양념</span>
+                            <span class="Exp">고추장, 양파, 마늘 등을 넣은 K-Food 특제 양념 소스와 블루치즈로 후레쉬한 풍미를 더해 고급스럽게 구현한 BBQ만의 양념치킨을 닭다리와 윙, 봉으로 즐길 수 있는 콤보 메뉴</span>
+                            <span class="price">25,500원</span>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="">황올 시그니처</a>
+                    <div class="contents">
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220317_BBQ_3%EC%9B%94_%EC%8B%A0%EC%A0%9C%ED%92%88_%EC%9E%90%EC%82%AC%EC%95%B1_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px).png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보</span>
+                            <span class="Exp">입안 가득히 퍼지는 고소하고 쫄깃한 식감과 치킨의 최고 맛있는 닭다리와 윙,봉을 함께 즐길 수 있는 메뉴</span>
+                            <span class="price">24,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%ED%81%AC%EB%9F%B0%EC%B9%98%EB%B2%84%ED%84%B0%EC%B9%98%ED%82%A8.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 <br>크런치 버터</span>
+                            <span class="Exp">달콤 짭짤한 버터향의 풍미와 핫하게 착 감기는 레드착착 시즈닝의 중독성 강한 크런치 버터 치킨을 닭다리와 윙, 봉으로 즐길 수 있는 콤보 메뉴</span>
+                            <span class="price">25,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%EB%B0%98%EB%B0%98.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 반반</span>
+                            <span class="Exp">BBQ 시크릿 양념소스와 바삭한 황금올리브치킨™ 2가지의 맛을 닭다리와 윙, 봉으로 한번에 느낄 수 있는 BBQ만의 반반 콤보 메뉴</span>
+                            <span class="price">25,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%EC%98%A4%EB%A6%AC%EC%A7%80%EB%82%A0%EC%96%91%EB%85%90%EC%B9%98%ED%82%A8.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 양념</span>
+                            <span class="Exp">고추장, 양파, 마늘 등을 넣은 K-Food 특제 양념 소스와 블루치즈로 후레쉬한 풍미를 더해 고급스럽게 구현한 BBQ만의 양념치킨을 닭다리와 윙, 봉으로 즐길 수 있는 콤보 메뉴</span>
+                            <span class="price">25,500원</span>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="">황올 1인분</a>
+                    <div class="contents">
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220317_BBQ_3%EC%9B%94_%EC%8B%A0%EC%A0%9C%ED%92%88_%EC%9E%90%EC%82%AC%EC%95%B1_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px).png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보</span>
+                            <span class="Exp">입안 가득히 퍼지는 고소하고 쫄깃한 식감과 치킨의 최고 맛있는 닭다리와 윙,봉을 함께 즐길 수 있는 메뉴</span>
+                            <span class="price">24,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%ED%81%AC%EB%9F%B0%EC%B9%98%EB%B2%84%ED%84%B0%EC%B9%98%ED%82%A8.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 <br>크런치 버터</span>
+                            <span class="Exp">달콤 짭짤한 버터향의 풍미와 핫하게 착 감기는 레드착착 시즈닝의 중독성 강한 크런치 버터 치킨을 닭다리와 윙, 봉으로 즐길 수 있는 콤보 메뉴</span>
+                            <span class="price">25,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%EB%B0%98%EB%B0%98.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 반반</span>
+                            <span class="Exp">BBQ 시크릿 양념소스와 바삭한 황금올리브치킨™ 2가지의 맛을 닭다리와 윙, 봉으로 한번에 느낄 수 있는 BBQ만의 반반 콤보 메뉴</span>
+                            <span class="price">25,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%EC%98%A4%EB%A6%AC%EC%A7%80%EB%82%A0%EC%96%91%EB%85%90%EC%B9%98%ED%82%A8.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 양념</span>
+                            <span class="Exp">고추장, 양파, 마늘 등을 넣은 K-Food 특제 양념 소스와 블루치즈로 후레쉬한 풍미를 더해 고급스럽게 구현한 BBQ만의 양념치킨을 닭다리와 윙, 봉으로 즐길 수 있는 콤보 메뉴</span>
+                            <span class="price">25,500원</span>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="">황올 양념</a>
+                    <div class="contents">
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220317_BBQ_3%EC%9B%94_%EC%8B%A0%EC%A0%9C%ED%92%88_%EC%9E%90%EC%82%AC%EC%95%B1_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px).png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보</span>
+                            <span class="Exp">입안 가득히 퍼지는 고소하고 쫄깃한 식감과 치킨의 최고 맛있는 닭다리와 윙,봉을 함께 즐길 수 있는 메뉴</span>
+                            <span class="price">24,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%ED%81%AC%EB%9F%B0%EC%B9%98%EB%B2%84%ED%84%B0%EC%B9%98%ED%82%A8.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 <br>크런치 버터</span>
+                            <span class="Exp">달콤 짭짤한 버터향의 풍미와 핫하게 착 감기는 레드착착 시즈닝의 중독성 강한 크런치 버터 치킨을 닭다리와 윙, 봉으로 즐길 수 있는 콤보 메뉴</span>
+                            <span class="price">25,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%EB%B0%98%EB%B0%98.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 반반</span>
+                            <span class="Exp">BBQ 시크릿 양념소스와 바삭한 황금올리브치킨™ 2가지의 맛을 닭다리와 윙, 봉으로 한번에 느낄 수 있는 BBQ만의 반반 콤보 메뉴</span>
+                            <span class="price">25,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%EC%98%A4%EB%A6%AC%EC%A7%80%EB%82%A0%EC%96%91%EB%85%90%EC%B9%98%ED%82%A8.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 양념</span>
+                            <span class="Exp">고추장, 양파, 마늘 등을 넣은 K-Food 특제 양념 소스와 블루치즈로 후레쉬한 풍미를 더해 고급스럽게 구현한 BBQ만의 양념치킨을 닭다리와 윙, 봉으로 즐길 수 있는 콤보 메뉴</span>
+                            <span class="price">25,500원</span>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="">황올 구이</a>
+                    <div class="contents">
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220317_BBQ_3%EC%9B%94_%EC%8B%A0%EC%A0%9C%ED%92%88_%EC%9E%90%EC%82%AC%EC%95%B1_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px).png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보</span>
+                            <span class="Exp">입안 가득히 퍼지는 고소하고 쫄깃한 식감과 치킨의 최고 맛있는 닭다리와 윙,봉을 함께 즐길 수 있는 메뉴</span>
+                            <span class="price">24,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%ED%81%AC%EB%9F%B0%EC%B9%98%EB%B2%84%ED%84%B0%EC%B9%98%ED%82%A8.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 <br>크런치 버터</span>
+                            <span class="Exp">달콤 짭짤한 버터향의 풍미와 핫하게 착 감기는 레드착착 시즈닝의 중독성 강한 크런치 버터 치킨을 닭다리와 윙, 봉으로 즐길 수 있는 콤보 메뉴</span>
+                            <span class="price">25,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%EB%B0%98%EB%B0%98.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 반반</span>
+                            <span class="Exp">BBQ 시크릿 양념소스와 바삭한 황금올리브치킨™ 2가지의 맛을 닭다리와 윙, 봉으로 한번에 느낄 수 있는 BBQ만의 반반 콤보 메뉴</span>
+                            <span class="price">25,000원</span>
+                        </div>
+                        <div class="NEW">
+                            <img src="https://img.bbq.co.kr:449/uploads/bbq_d/thumbnail/20220318_BBQ_%ED%99%A9%EA%B8%88%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%B9%98%ED%82%A8_%EC%BD%A4%EB%B3%B4_%EC%9E%90%EC%82%AC%EC%95%B1_%EC%8D%B8%EB%84%A4%EC%9D%BC(480x480px)_%EC%98%A4%EB%A6%AC%EC%A7%80%EB%82%A0%EC%96%91%EB%85%90%EC%B9%98%ED%82%A8.png">
+                            <span>황금올리브치킨<sup>TM</sup> 콤보 양념</span>
+                            <span class="Exp">고추장, 양파, 마늘 등을 넣은 K-Food 특제 양념 소스와 블루치즈로 후레쉬한 풍미를 더해 고급스럽게 구현한 BBQ만의 양념치킨을 닭다리와 윙, 봉으로 즐길 수 있는 콤보 메뉴</span>
+                            <span class="price">25,500원</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <img id="menu_img" src="https://t1.daumcdn.net/cfile/tistory/2607554252AA68B630">
+        <div id="Order_btn" onclick="ORDER()">온라인 주문</div>
+        <div id="order">
+            <div id="delivery" class="open">
+                <span>배달 주문</span>
+            </div>
+            <div id="delivery_c">
+                <input class="address" type="text" placeholder="주소 검색하여 배달지 추가">
+                <input class="gps" type="text" placeholder="현 위치 기반 주소 검색">
+            </div>
+            <div id="ToGo" class="open">
+                <span>포장 주문</span>
+            </div>
+            <div id="ToGo_c">
+                <input class="address" type="text" placeholder="주소 검색하여 매장명 추가">
+                <input class="gps" type="text" placeholder="현 위치 기반 주소 검색">
+            </div>
+            <div id="coupon" class="open">
+                <span>모바일 상품권 주문</span>
+            </div>
+            <div id="coupon_c">
+                <span>상품권 번호를 입력하여 주세요.</span>
+                <input type="text" placeholder="상품권 번호 입력">
+                <button type="button">추가</button>
+            </div>
+            <a href="https://bbq.multicon.co.kr/"><div id="gift">
+                <span>선물하기</span>
+            </div></a>
+            <div id="Top10">
+                <div id="popular">실기간 인기</div>
+                <div class="chart">1. 황금올리브치킨<sup>TM</sup></div>
+                <div class="chart">2. 황금올리브치킨<sup>TM</sup>반반</div>
+                <div class="chart">3. 황금올리브치킨<sup>TM</sup>닭다리</div>
+                <div class="chart">4. 자메이카 통다리구이</div>
+                <div class="chart">5. 오리지날 양념치킨</div>
+                <div class="chart">6. 황금올리브치킨<sup>TM</sup>순살</div>
+                <div class="chart">7. 핫황금올리브치킨<sup>TM</sup></div>
+                <div class="chart">8. 황금올리브치킨<sup>TM</sup>핫윙</div>
+                <div class="chart">9. 황올한 깐풍순살</div>
+                <div class="chart">10. 황금올리브치킨<sup>TM</sup>순살반반</div>
+            </div>
+            <div id="Pts">
+                <div id="points">포인트 <span>0P</span></div>
+                <div id="certificate">상품권 <span>0개</span></div>
+            </div>
+            <div id="etc">
+                <div class="etc"><a href=""><img src="https://m.bbq.co.kr/images/common_new/footer_img02.png"></a></div>
+                <div class="etc"><a><img src="https://m.bbq.co.kr/images/common_new/footer_img03.png"></a></div>
+                <div class="etc"><a><img src="https://m.bbq.co.kr/images/common_new/footer_img04.png"></a></div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div id="left">
+            <span>주식회사 제너시스비비큐</span><br><br>
+            주문번호 : <span>1588-9282</span>&nbsp&nbsp&nbsp&nbsp 고객센터 : <span>1588-9282</span>&nbsp&nbsp&nbsp&nbsp 창업문의 : <span>080-383-9000</span><br>
+            대표자 : 이승재 &nbsp&nbsp&nbsp&nbsp 서울시 송파구 중대로 64(문정동) &nbsp&nbsp&nbsp&nbsp 통신판매업신고 : 2010-서울송파-1181호 &nbsp&nbsp&nbsp&nbsp 사업자등록번호 : 207-81-43555<br><br>
+            © 2019 GENESIS BBQ. All rights reserved.
+        </div>
+        <div id="right">
+            <span>개인정보처리방침</span><br>
+            이용약관<br>
+            멤버쉽 약관
+        </div>
+    </footer>
+
+
+
+
+
+
+    <script>
+        var bar = document.getElementById("menuBar");
+        var bars = document.getElementsByClassName("bar");
+
+        var Gd = document.getElementById("Golden");
+        var Sp = document.getElementById("Spicy");
+        var Gr = document.getElementById("Grilled");
+
+        var order_btn = document.getElementById("Order_btn");
+        var order = document.getElementById("order");
+        var open = document.getElementsByClassName("open");
+
+        var post = document.getElementsByClassName("posts")
+        for(i = 0; i < post.length; i++)
+            {
+            post[i].style.top = i * 42.5 + "%";
+            }
+
+        var NEW = document.getElementsByClassName("NEW");
+        var c = 0, d;
+        for(i = 0; i < NEW.length; i++)
+            {
+            if(window.matchMedia("(max-width: 800px)").matches)
+                {
+                if(i == 4 * c)
+                    {
+                    NEW[i].style.left ="10%";
+                    NEW[i].style.top ="20%";
+                    }
+                else if(i == 1 + 4 * c)
+                    {
+                    NEW[i].style.left ="55%";
+                    NEW[i].style.top ="20%";
+                    }
+                else if(i == 2 + 4 * c)
+                    {
+                    NEW[i].style.left ="10%";
+                    NEW[i].style.top ="70%";
+                    }
+                else if(i == 3 + 4 * c)
+                    {
+                    NEW[i].style.left ="55%";
+                    NEW[i].style.top ="70%";
+                    c++;
+                    }
+                }
+            else
+                {
+                console.log("123")
+                NEW[i].style.left = 5 + i * 23.75 - (23.75 * 4) * c + "%";
+                if(i > 3 + 4 * c)
+                    {
+                    c++;
+                    NEW[i].style.left = 5 + i * 23.75 - (23.75 * 4) * c + "%";
+                    }
+                }
+            }
+
+
+
+        var chart = document.getElementsByClassName("chart")
+        for(i = 0; i < chart.length; i++)
+            {
+            chart[i].style.top = i * 100 + "%";
+            }
+
+
+        function menuIcon(x)
+            {
+            x.classList.toggle("change");
+            if (bar.style.right == "0px")
+                {
+                bar.style.right = "-300px";
+                for(i = 0; i < bars.length; i++)
+                    {
+                    bars[i].style.background = "#c70a2f";
+                    }
+                }
+            else
+                {
+                bar.style.right = "0px";
+                for(i = 0; i < bars.length; i++)
+                    {
+                    bars[i].style.background = "#333";
+                    }
+                }
+            }
+
+        function showChicken()
+            {
+            Gd.style.opacity = 1;
+            setTimeout(function()
+                {
+                Sp.style.opacity = 1;
+                setTimeout(function()
+                    {
+                    Gr.style.opacity = 1;
+                    }, 500)
+                }, 500)
+            }
+
+        window.onload = showChicken
+
+        setInterval(function()
+            {
+            for(i = 0; i < post.length; i++)
+                {
+                if(post[post.length - 1].style.top == "0%")
+                    {
+                    post[i].style.top = i * 42.5 + "%";
+                    }
+                else
+                    {
+                    post[i].style.top = parseFloat(post[i].style.top.replace("%", "")) - 42.5 + "%";
+                    }
+                }
+            }, 3000);
+
+        function ORDER()
+            {
+            if(window.matchMedia("(max-width: 800px)").matches)
+                {
+                if(order_btn.style.top == "15%")
+                    {
+                    order.style.transform = "scale(0, 0)";
+                    setTimeout(function()
+                        {
+                        order_btn.style.top = "80%"
+                        }, 1500)
+                    }
+                else
+                    {
+                    order_btn.style.top = "15%";
+                    setTimeout(function()
+                        {
+                        order.style.transform = "scale(1, 1)";
+                        }, 1500)
+                    }
+                }
+            else
+                {
+                if(order_btn.style.top == "57.5%")
+                    {
+                    order.style.transform = "scale(0, 0)";
+                    setTimeout(function()
+                        {
+                        order_btn.style.top = "80%"
+                        }, 1100)
+                    }
+                else
+                    {
+                    order_btn.style.top = "57.5%";
+                    setTimeout(function()
+                        {
+                        order.style.transform = "scale(1, 1)";
+                        }, 1100)
+                    }
+                }
+            }
+
+        setInterval(function()
+            {
+            for(i = 0; i < chart.length; i++)
+                {
+                if(chart[chart.length - 1].style.top == "0%")
+                    {
+                    chart[i].style.top = i * 100 + "%";
+                    }
+                else
+                    {
+                    chart[i].style.top = parseFloat(chart[i].style.top.replace("%", "")) - 100 + "%";
+                    }
+                }
+            }, 2500);
+
+        for(i = 0; i < open.length; i++)
+            {
+
+            if(window.matchMedia("(max-width: 800px)").matches)
+                {
+                open[i].addEventListener("click", function(e)
+                    {
+                    var t = getComputedStyle(e.target).getPropertyValue("top");
+                    if(t == "109.141px")
+                        {
+                        e.target.style.top = "-12.5%";
+                        }
+                    else if(t == "327.438px")
+                        {
+                        e.target.style.top = "17.5%";
+                        }
+                    else if(e.target.style.top == "-12.5%")
+                        {
+                        e.target.style.top = "15%";
+                        }
+                    else
+                        {
+                        e.target.style.top = "45%";
+                        }
+                    })
+                }
+            else
+                {
+                open[i].addEventListener("click", function(e)
+                    {
+                    if(e.target.style.top == "-35%")
+                        {
+                        e.target.style.top = "15%";
+                        }
+                    else
+                        {
+                        e.target.style.top = "-35%";
+                        }
+                    })
+                }
+            }
+
+    </script>
+</body>
+</html>
