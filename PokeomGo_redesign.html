@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PokemonGo_redesign</title>
+    <style>
+        @font-face
+            {
+            font-family: 'HallymGothic-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2204@1.0/HallymGothic-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            }
+
+
+
+        body
+            {
+            background: #0c1c3e;
+            margin: 0;
+            }
+        a
+            {
+            text-decoration: none;
+            }
+        div, span, a
+            {
+            font-family: 'HallymGothic-Regular';
+            }
+
+        #main
+            {
+            position: relative;
+            max-width: 1728px; height: 500vh;
+            margin: 0 auto;
+            background: #000;
+            box-shadow: 15px 10px 10px rgba(0,0,0,0.4), -15px 10px 10px rgba(0,0,0,0.4);
+            overflow: hidden;
+            }
+
+        #nav_bar
+            {
+            position: fixed;
+            width: 1728px;; height: 100px;
+            top: 0; z-index: 500;
+            background: rgba(12, 28, 62, 0.9);
+            transition: top 1s;
+            }
+        #logo
+            {
+            position: absolute;
+            max-height: 60%;
+            left: 5%; top: 20%;
+            }
+        #nav_list_wrap
+            {
+            position: absolute;
+            left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            }
+        #nav_list
+            {
+            list-style-type: none;
+            display: table;
+            color: white;
+            }
+        #nav_list li
+            {
+            display: table-cell;
+            float: left;
+            margin: 0 20px;
+            }
+
+
+
+        #sec1
+            {
+            position: relative;
+            display: flex;
+            width: 100%; max-height: 100%;
+            top: 100px;
+            }
+        #sec1 video
+            {
+            display: block;
+            width: 100%;
+            }
+
+
+
+        #sec2
+            {
+            position: relative;
+            display: flex;
+            width: 100%; height: 6%;
+            top: 2%; left: 100%;
+            background: url("https://lh3.googleusercontent.com/5-w5yrCLD69zlOIfgMndRr4dMhrKW5u8nJVojvrUqnSI8ln1ywgqzNFjWQJYrN2YlVSBMHNyXzhcIrQXRPUYTcqJXjAzYbJyXiXb_uK3YO2G-g=rw-e365-w1440");
+            background-repeat: no repeat; background-size: cover;
+            box-shadow: inset 15px 10px 15px rgba(0,0,0,0.4);
+            transition: left 5s;
+            }
+        #sec2.active
+            {
+            left: 0;
+            }
+        #Poke-Stop
+            {
+            position: absolute;
+            height: 50%;
+            left: 20%; top: 50%;
+            transform: translateY(-50%);
+            }
+        #Poke-Stop img
+            {
+            height: 100%;
+            }
+        #ToNewbies
+            {
+            position: absolute;
+            height: 50%;
+            left: 35%; top: 50%;
+            transform: translateY(-50%);
+            }
+        #ToNewbies div:first-child
+            {
+            font-size: 30px; font-weight: bold;
+            }
+        #ToNewbies div
+            {
+            margin-bottom: 12.5px;
+            }
+        #MoveToGuide
+            {
+            display: flex;
+            height: 25%; width: 60%;
+            border: 2px solid #0061af; border-radius: 25px;
+            justify-content: center; align-items: center;
+            background: white; color: #0061af;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
+            transition: all 1s;
+            }
+        #MoveToGuide:hover
+            {
+            border: 2px solid white;
+            background: #0061af;
+            color: white;
+            }
+        #MoveToGuide:active
+            {
+            box-shadow: inset 5px 5px 10px rgba(0,0,0,0.4);
+            }
+        #Pokemon
+            {
+            position: absolute;
+            display: flex;
+            height: 60%;
+            left: 60%; top: 50%;
+            transform: translateY(-50%);
+            }
+        #Pokemon img
+            {
+            height: 100%;
+            }
+
+
+
+        #sec3
+            {
+            position: relative;
+            display: flex;
+            width: 100%; height: 20%;
+            top: 2%;
+            background: url("https://lh3.googleusercontent.com/4I4XB51OZpQL-JuSUcd8yrchFvAXJrK405d6CtVX9hXOqAC4vFTeuwFACbVzPSCOEeRtMHlLqA33rvlcnGb3FPTSfOuusljfWH9sf1U45Aaq=rw-e365-w1440");
+            background-repeat: no repeat; background-size: cover;
+            }
+        #NEWS
+            {
+            position: absolute;
+            font-size: 50px;
+            left: 50%; top: 10%;
+            transform: translateX(-50%);
+            }
+        .news
+            {
+            position: absolute;
+            width: 60%; height: 60%;
+            border: 10px double black; border-radius: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            }
+        .date
+            {
+            position: absolute;
+            left: 2%; top: 80%;
+            font-weight: bold; font-size: 20px;
+            transition: font-size 2s;
+            }
+        .news_title
+            {
+            position: absolute;
+            width: 96%; height: 6%;
+            left: 2%; top: 90%;
+            font-weight: bold; font-size: 25px;
+            overflow:hidden;
+            text-overflow:ellipsis; white-space:nowrap;
+            transition: font-size 2s;
+            }
+        .news_btn
+            {
+            position: absolute;
+            display: flex;
+            width: 4%; height: 5%;
+            bottom: 12.5%;
+            background: white;
+            border-radius: 15px; border: 2px solid #0061af;
+            justify-content: center; align-items: center;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.4)
+            }
+        .news_btn:hover
+            {
+            transform: scale(1.1, 1.1);
+            transition: .5s;
+            }
+        .news_btn:active
+            {
+            box-shadow: inset 5px 5px 10px rgba(0,0,0,0.4)
+            }
+        .btnB
+            {
+            left: 20%;
+            filter: brightness(50%);
+            }
+        .btnN
+            {
+            right: 20%;
+            }
+        #more_news
+            {
+            position: absolute;
+            display: flex;
+            width: 10%; height: 5%;
+            left: 50%; transform: translateX(-50%); top: 90%;
+            font-weight: bold;
+            justify-content: center; align-items: center;
+            border-radius: 25px; border: 2px solid #0061af;
+            background: white; box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
+            color: black;
+            }
+        #more_news:hover
+            {
+            background: #0061af;
+            color: white;
+            }
+        #more_news:active
+            {
+            box-shadow: inset 5px 5px 10px rgba(0,0,0,0.4)
+            }
+
+
+
+        #sec4
+            {
+            position: relative;
+            display: flex;
+            width: 100%; height: 55vh;
+            top: 2%; z-index: 5;
+            background: url("https://lh3.googleusercontent.com/39fWyzZddwsbUYLvJ99H5Gxj2erERkIRY--psXpnKMerQfZmO5Wd5AmULRgmmlNZaSrcUkvKAf0liZBkPquwhmmfeWEql_S_mnapIzau83l0WV4=rw-e365-w1440"),
+                        url("https://lh3.googleusercontent.com/RGShDyVofSODXIJ0eQ9umAID8tCw9KdqBFrtgCEdrxjJijG1qZBryfECP9IRV1MOJhCk4Za4VYB34DE-hnPesZNNVYMwgHKs9KrNue3LNJRJuw=rw-e365-w1440");
+            background-repeat: no-repeat, no-repeat; background-size: 48.5% 100%, 55% 100%; background-position: left, right;
+            box-shadow: 0 20px 20px rgba(0,0,0,0.6)
+            }
+        #wrap
+            {
+            position: relative;
+            display: flex;
+            width: 35%; height: 35%;
+            left: 10%; top: 50%; transform: translateY(-50%);
+            color: white;
+            }
+        #pokeball
+            {
+            position: absolute;
+            width: 100px; height: 100px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: inset 5px 5px 10px rgba(0,0,0,0.4)
+            }
+        #pokeball img
+            {
+            height: 60%; margin: 20% 0 0 20%;
+            }
+        #catch, #find, #collect
+            {
+            position: absolute;
+            }
+        #catch
+            {
+            font-size: 30px; font-weight: bold;
+            left: 25%;
+            }
+        #find
+            {
+            font-size: 35px;
+            left: 25%; top: 32.5%;
+            }
+        #collect
+            {
+            font-size: 18px;
+            bottom: 0;
+            }
+
+
+
+        #sec5
+            {
+            position: relative;
+            display: flex;
+            width: 100%; height: 20%;
+            top: 2%;
+            background: url("https://lh3.googleusercontent.com/Hxrm0FEgRutcRL2mhNnpHdwDLPjlXnGMotdtlzRxwtLXK2hDbhgmA_gDFRkpeYJvrC5xrkB52NM4RQrloB-Ob7IgKTpFzciYkjwTnc36HEu_XSM=rw-e365-w1440");
+            background-repeat: no repeat; background-size: cover;
+            }
+        #Items
+            {
+            position: absolute;
+            width: 30%;
+            left: 35%; top: 10%;
+            font-size: 18px; text-align: center;
+            transform-origin: 50% 50%;
+            transition: transform 3s;
+            }
+        #Items span
+            {
+            font-size: 40px; font-weight: bold;
+            }
+        #Items.active2
+            {
+            transform: rotateY(1080deg);
+            }
+
+
+
+        #sec6
+            {
+            position: relative;
+            display: flex;
+            width: 100%; height: 8%;
+            top: 2%;
+            background: url("https://lh3.googleusercontent.com/sscJ3XNJlmo_mIF_E_aSXgoVbhj5JNTrZHSuDM6EUAXr-9TWUyVf11zBMpMaABjQbWPVyFbKWCHHmKzEQZIK06HFlrnjNbH7US8xRA8Z5_voXn0=rw-e365-w1440");
+            background-repeat: no-repeat; background-size: cover;
+            overflow: hidden;
+            }
+        #GO_wrap
+            {
+            position: relative;
+            display: flex;
+            width: 25%; height: 50%;
+            left: 20%; top: 50%; transform: translateY(-50%);
+            color: white;
+            }
+        #R
+            {
+            display: flex;
+            width: 100px; height: 100px;
+            background-color: white;
+            color: #da291c;
+            border-radius: 50%;
+            justify-content: center; align-items: center;
+            }
+        #R img
+            {
+            width: 50%;
+            }
+        #GO
+            {
+            position: absolute;
+            font-size: 40px; font-weight: bold;
+            left: 35%; top: 12.5%;
+            }
+        #GO_dscr
+            {
+            position: absolute;
+            bottom: 0;
+            }
+        #night_img
+            {
+            position: absolute;
+            width: 50%; height: 70%;
+            right: 0; bottom:0;
+            }
+        .leaders
+            {
+            position: absolute;
+            height: 120%;
+            bottom: -30%;;
+            }
+        #leaderName
+            {
+            position: absolute;
+            right: 20%; top: 40%;
+            font-size: 30px; font-weight: bold;
+            color: white;
+            }
+        .GO_btn
+            {
+            position: absolute;
+            display: flex;
+            width: 4%; height: 6.5%;
+            top:10%;
+            background: white;
+            border-radius: 15px; border: 2px solid #0061af;
+            justify-content: center; align-items: center;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.4)
+            }
+        .GO_btn:active
+            {
+            box-shadow: inset 5px 5px 10px rgba(0,0,0,0.4);
+            }
+        .back
+            {
+            right: 10%;
+            }
+        .next
+            {
+            right: 5%;
+            }
+
+
+
+        #sec7
+            {
+            position: relative;
+            display: flex;
+            width: 100%; height: 7%;
+            top: 2%;
+            background: url("https://lh3.googleusercontent.com/d3MUt9qnSpEQTo_yOpwf9wefXSrAbGeFT1uo69kPu0piUpx3dt7k99rRpaMZAM3rV-MwVSZe8sGuPHmFKnmwP-2S2jE8KnJnvXo2-MsaMa2B-hI=rw-e365-w1440");
+            background-repeat: no-repeat; background-size: cover;
+            overflow: hidden;
+            }
+        #last_logo
+            {
+            position: absolute;
+            height: 55%;
+            left: 25%; top: 50%; transform: translateY(-50%);
+            }
+        #last_logo img
+            {
+            height: 100%;
+            }
+        #Adv_wrap
+            {
+            position: absolute;
+            width: 30%; height: 55%;
+            left: 47.5%; top: 50%; transform: translateY(-50%);
+            }
+        #App
+            {
+            position: absolute;
+            height: 45%;
+            border-radius: 10px;
+            }
+        #download
+            {
+            position: absolute;
+            left: 20%; top: -10%;
+            color: white; font-size: 40px;
+            line-height: 1.5;
+            }
+        .store
+            {
+            position: absolute;
+            width: 30%; height: 25%;
+            top: 70%;
+            }
+        .Apple
+            {
+            left: 3.3%;
+            background: url("https://storage.googleapis.com/nianticweb-media/badges/appstore-badges/appstore_badge_black_ko.svg");
+            background-repeat: no-repeat; background-size: 100% 100%;
+            }
+        .Google
+            {
+            left:50%; transform: translate(-50%);
+            background: url("https://storage.googleapis.com/nianticweb-media/badges/play-badges/googleplay_ko.png");
+            background-repeat: no-repeat; background-size: 100% 100%;
+            }
+        .Galaxy
+            {
+            left: 66.7%;
+            background: url("https://storage.googleapis.com/nianticweb-media/badges/galaxy-badges/GalaxyStore_ko.png");
+            background-repeat: no-repeat; background-size: 100% 100%;
+            }
+
+
+
+        footer
+            {
+            position: relative;
+            display: flex;
+            width: 100%; height: 7%;
+            bottom: -1.2%;
+            background: white;
+            justify-content: center; align-items: center;
+            }
+        footer div
+            {
+            margin: 0 15%;
+            text-align: center;
+            font-size: 16.5px;
+            }
+
+
+
+
+    </style>
+</head>
+<body>
+    <div id="main">
+        <nav id="nav_bar">
+            <img id="logo" src="https://lh3.googleusercontent.com/3TSaKxXGo2wT0lu0AyNUBnkk6wkCC2AzOhJyy3JXIPm-AmZ1k9DSAroWeBUyePswCZSs5lVp3mPF7HzUpY9VPlyOV5eddITONINr3WSqLNLm=e365-w600">
+            <div id="nav_list_wrap">
+                <ul id="nav_list">
+                    <li>GO FEST</li>
+                    <li>시즌</li>
+                    <li>순위표</li>
+                    <li>이벤트</li>
+                    <li>알림</li>
+                    <li>서포트</li>
+                    <li>쿠폰 사용</li>
+                </ul>
+            </div>
+        </nav>
+
+        <section id="sec1">
+            <video src="https://ifh.cc/v/Y5JKQH.mp4" autoplay loop muted></video>
+        </section>
+
+        <section id="sec2">
+            <div id="Poke-Stop">
+                <img src="https://lh3.googleusercontent.com/6Mht5q867Kt0SMUZ2wJlMwqRfLeSJSgiSAUCsTdSFwAEjNKEE5GBdlXhlqDrk70k1QDCWjOCQAi5Kf1RCffNWI4mvPogrMZVgA1Eb3Awjt8lrbY=e365-w800">
+            </div>
+            <div id="ToNewbies">
+                <div>초심자 트레이너분들께</div>
+                <div>“Pokémon GO”의 간략한 가이드를 확인해주세요!</div>
+                <div id="MoveToGuide" onclick="scrollToGuide()">
+                    “Pokémon GO”의 첫걸음
+                </div>
+            </div>
+            <div id="Pokemon">
+                <img src="https://lh3.googleusercontent.com/9FHOk79iiGEisBJxkU9smRi8CUKagEkt_yl7T7z9mEBHypSg5sblsGkv1YOxj-4vCpVbYUeo7dC6q2rxiHn9fNlcBxXGabLd7RpsNC6MHrwCRw=rw-e365-w1440">
+            </div>
+        </section>
+
+        <section id="sec3">
+            <div id="NEWS">최신 소식</div>
+            <a href="https://pokemongolive.com/ko/post/communityday-august-2022-galarian-zigzagoon/">
+                <div class="news">
+                    <div class="date">2022년 7월 28일</div>
+                    <div class="news_title">2022년 8월 커뮤니티 데이: "지그제구리(가라르의 모습)"</div>
+                </div>
+            </a>
+            <a href="https://pokemongolive.com/ko/post/community-day-july-2022-recap/">
+                <div class="news">
+                    <div class="date">2022년 7월 28일</div>
+                    <div class="news_title">7월 커뮤니티 데이에 참가해주셔서 감사합니다!</div>
+                </div>
+            </a>
+            <a href="https://pokemongolive.com/ko/post/august-2022-content-update/">
+                <div class="news">
+                    <div class="date">2022년 7월 27일</div>
+                    <div class="news_title">8월의 최신 정보: "Pokémon GO Fest: Sapporo"와 "Pokémon GO Fest 2022: 피날레", "자시안"과 "자마젠타"가 레이드배틀에 재등장, 벌레타입 포켓몬 이벤트 등 다양한 이벤트!</div>
+                </div>
+            </a>
+            <a href="https://pokemongolive.com/ko/post/gofest-seattle-recap/">
+                <div class="news">
+                    <div class="date">2022년 7월 27일</div>
+                    <div class="news_title">"Pokémon GO Fest 2022: Seattle"을 즐겨 주셔서 감사합니다!</div>
+                </div>
+            </a>
+            <a href="https://pokemongolive.com/ko/post/daily-adventure-incense-update/">
+                <div class="news">
+                    <div class="date">2022년 7월 26일</div>
+                    <div class="news_title">"산책향로"가 "Pokémon GO"에 새롭게 등장!</div>
+                </div>
+            </a>
+            <div class="news_btn btnB" onclick="moveB_news()"><img src="https://ifh.cc/g/BShFvR.png"></div>
+            <div class="news_btn btnN" onclick="moveN_news()"><img src="https://ifh.cc/g/vf9G5F.png"></div>
+            <a href="https://pokemongolive.com/ko/post/">
+                <div id="more_news">더 많은 소식</div>
+            </a>
+        </section>
+
+        <section id="sec4">
+            <div id="wrap">
+                <div id="pokeball" >
+                    <img src="https://lh3.googleusercontent.com/MxqAAjte5yQsQD0cC73SBVJuH6kX9F-fQ1X97VecyhGHGpixcT1ce7OftVuDufTSVIG_gY233437bOmw1AZFpg1Har4t5sP1jDo4GAX_so38dg=e365-w261">
+                </div>
+                <div id="catch">포켓몬을 잡아보세요</div>
+                <div id="find">파트너 포켓몬을 찾아보세요!</div>
+                <div id="collect">포켓몬을 잡고 모아보세요! 알을 부화시키거나 다른 트레이너와 교환해서도 모을 수 있습니다.</div>
+            </div>
+        </section>
+
+        <section id="sec5">
+            <div id="Items">
+                <span>모험에서 사용할 수 있는 도구</span><br>
+                포켓스톱 및 체육관에서 “포토디스크”를 돌려 “Pokémon GO”에서 사용할 수 있는 도구를 모아보세요. “몬스터볼”이나 “나무열매”, 진화에 필요한 도구 등을 받을 수 있습니다.
+            </div>
+        </section>
+
+        <section id="sec6">
+            <div id="GO_wrap">
+                <div id="R">
+                    <img src="https://ifh.cc/g/RSbqC4.png">
+                </div>
+                <div id="GO">GO로켓단</div>
+                <div id="GO_dscr">GO로켓단의 마수가 “Pokémon GO”의 세계에 뻗쳐오고 있습니다! "스페셜리서치" 클리어나 “그림자 포켓몬”을 구하는 과정에서, GO로켓단에게 승부를 걸어 야망을 저지할 수 있습니다.</div>
+            </div>
+            <img id="night_img" src="https://lh3.googleusercontent.com/fH4gNEkGUr66Xb4oexiC2kwgcCP6xkBfpNUMX__Jbnj_i8NswrrJjdukVmrgfWOCX9HWmzfb8nYn9GOn3eDnmqyP3yjy2jri8Gw0EW4qGml5NSE=rw-e365-w1440">
+            <img class="leaders" src="https://lh3.googleusercontent.com/zZuI-p4fvjSMvNarg8PrhwMhJqTf7ZmElAt-zGXL8HKJPcdGbvS_TGLptNARQgaxWRVtg3idcLS9FVTbIr-MdmXokFMC-hsQtVXW9hfFln-mGjY=rw-e365-w1440">
+            <img class="leaders" src="https://lh3.googleusercontent.com/Q-V4l9favlWr3tg5PzTfzntRZa_V5o0QGCB7rAc7WYcEUEwozGurPu36MBWH2kj6iYrOHJ7CCjaTp2PXeAfWs06d-O_5pxfJMBwWjtJHq-hD2w=rw-e365-w1440">
+            <img class="leaders" src="https://lh3.googleusercontent.com/_9MpLXyDo6xrl3NfkyEg5MpEeZQjFY30pDpF4fMN2wK2ylPhWwKHFIRTQOfwYTCtpV3ndfGjVDbwTl-hdAyZlstaaYwybsZHuP3yaAUEAggYTw=rw-e365-w1440">
+            <span id="leaderName">Arlo</span>
+            <div class="GO_btn back" onclick="GO_back()"><img src="https://ifh.cc/g/BShFvR.png"></div>
+            <div class="GO_btn next" onclick="GO_next()"><img src="https://ifh.cc/g/vf9G5F.png"></div>
+        </section>
+
+        <section id="sec7">
+            <div id="last_logo">
+                <img src="https://lh3.googleusercontent.com/3TSaKxXGo2wT0lu0AyNUBnkk6wkCC2AzOhJyy3JXIPm-AmZ1k9DSAroWeBUyePswCZSs5lVp3mPF7HzUpY9VPlyOV5eddITONINr3WSqLNLm=e365-w600">
+            </div>
+            <div id="Adv_wrap">
+                <img id="App" src="https://lh3.googleusercontent.com/sOEq-1RxpWsKq66owqonO9HLry3WLqEcoBpmNMu4_Xpj_Xxy2OJIkHKIKnVum2WRGYd35MTzGN3L-ZZcz4cnMecj2L8z9RtyPa7v0Q9RKfmYsQ=e365-s0">
+                <div id="download">자, 모험을 떠나봅시다!<br>지금 바로 다운로드</div>
+                <div class="store Apple"></div>
+                <div class="store Google"></div>
+                <div class="store Galaxy"></div>
+            </div>
+        </section>
+
+        <footer>
+            <div>
+                “Pokémon GO”는 영어, 프랑스어, 독일어, 이탈리아어, 러시아어, 일본어, 스페인어, 중국어(번체), 한국어, 태국어, 포르투갈어(브라질)로 플레이가 가능합니다.<br><br>
+©2022 Niantic, Inc. ©2022 Pokémon. ©1995–2022 Nintendo / Creatures Inc. / GAME FREAK inc. 포켓몬스터, 포켓몬, Pokémon은 Nintendo의 상표입니다. ※게임을 플레이할 때는 주변 안전에 주의하고 매너를 지키면서 플레이해주세요. ※기본 플레이 무료 ※일부 아이템 과금 있음. ※미성년자는 유료 아이템 구매시 반드시 보호자의 확인을 받거나 함께 구매해주세요. Apple 및 Apple 로고는 미국과 그 밖의 나라에 등록된 Apple Inc.의 상표입니다. App Store는 Apple Inc.의 서비스 상표입니다. Google Play 및 Google Play 로고는 Google LLC의 상표입니다.
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        var nav = document.getElementById("nav_bar");
+
+        var sec2 = document.getElementById("sec2");
+
+        var news = document.getElementsByClassName("news");
+        var news_img_files = ["https://lh3.googleusercontent.com/V10u5FUySXaHkndfCrRXrOmzSizY13sm8-HgSgcxBwTgF82iQToJhwg6E-Fr2CdGJQENuznxdTG7OOVDtPGjwJHbtTrhiFY9cwU81dlwkTMjSw",
+                        "https://lh3.googleusercontent.com/EYH-8gNzYUAs3ZK4KdVNXW6-WqIGEtuvmLHgGqVWmdnJtxFpgE5Y518D_W6D80TPdWcunp7ZERpPRqcgTOt7OsGO2WaPwaEED1OEbOJXCAIN",
+                        "https://lh3.googleusercontent.com/Ls9fDSL84v9D6FMoMQQdjO_8MUjuxlFs7zn8XklKiTPr853I8jFE-zjoHf6ZdUznU6sbY3hibZrNsCaR3hZPqYB-25nTqy_9VECCrkTSpbcD6lg",
+                        "https://lh3.googleusercontent.com/6_YO1mQnwCwnmrcz8WOJAxnYazn1qhXVq0pCuzaymLKjFkgmJ2bM1wTt3kUPsfoWaPZ6RT4PRgMBSJVj3el7xRJxhLfe3p2jrkJyQ39LAOBitQ",
+                        "https://lh3.googleusercontent.com/wKz6Dhia6XdgtNs1OtT1GOP4GvJDwkCImSTKzf-zyuVLe8g5NYA-_IVYjOSz_AG2sQc70pRkYyyL71AS62_mst-v1UXS_EZnmhDO_T1heE29b60"];
+
+        var date = document.getElementsByClassName("date");
+        var nTitle = document.getElementsByClassName("news_title");
+        var btnB = document.getElementsByClassName("btnB")[0];
+        var btnN = document.getElementsByClassName("btnN")[0];
+
+        var sec4 = document.getElementById("sec4");
+
+        var sec5 = document.getElementById("sec5");
+        var Items = document.getElementById("Items");
+
+        var leaders = document.getElementsByClassName("leaders");
+        var back = document.getElementsByClassName("back")[0];
+        var next = document.getElementsByClassName("next")[0];
+        var leader = document.getElementById("leaderName");
+        var leaderName = ["Arlo", "Cliff", "Ciera"]
+
+
+        window.addEventListener('wheel', function(e)
+            {
+
+            if(e.deltaY < 0)
+                {
+                nav.style.top = "0px";
+                }
+            else
+                {
+                nav.style.top = "-100px";
+                }
+            });
+
+
+
+
+        function scrollToGuide()
+            {
+            sec4.scrollIntoView({behavior : 'smooth'});
+            }
+
+
+
+        for(i = 0; i < news.length; i++)
+            {
+            news[i].style.left = 19.5 + i * 65 + "%";
+            news[i].style.background = "url('" + news_img_files[i] + "')";
+            news[i].style.backgroundRepeat = "no-repeat";
+            news[i].style.backgroundSize = "100% 100%";
+            if(news[i].style.left == "19.5%")
+                {
+                news[i].style.transformOrigin = "50% 50%";
+                news[i].style.transform = "scale(1, 1) translateY(-50%)";
+                }
+            else
+                {
+                news[i].style.transformOrigin = "50% 50%";
+                news[i].style.transform = "scale(.9, .9) translateY(-50%)";
+                date[i].style.fontSize = "17px";
+                nTitle[i].style.fontSize = "22px";
+                }
+            }
+
+        function moveN_news()
+            {
+            if(parseFloat(news[news.length - 1].style.left.replace("%", "")) > 19.5)
+                {
+                btnB.style.filter = "brightness(100%)";
+                for(i = 0; i < news.length; i++)
+                    {
+                    news[i].style.transition = "left 1.5s, transform 1.5s";
+                    news[i].style.left = parseFloat(news[i].style.left.replace("%", "")) - 65 + "%";
+                    if(news[i].style.left == "19.5%")
+                        {
+                        news[i].style.transform = "scale(1, 1) translateY(-50%)";
+                        date[i].style.fontSize = "20px";
+                        nTitle[i].style.fontSize = "25px";
+                        }
+                    else if(news[i].style.left == "-45.5%")
+                        {
+                        news[i].style.transform = "scale(.9, .9) translateY(-50%)"
+                        date[i].style.fontSize = "17px";
+                        nTitle[i].style.fontSize = "22px";
+                        }
+                    if(news[news.length - 1].style.left === "19.5%")
+                        {
+                        btnN.style.filter = "brightness(50%)";
+                        }
+                    }
+                }
+            }
+
+        function moveB_news()
+            {
+            if(parseFloat(news[0].style.left.replace("%", "")) < 19.5)
+                {
+                btnN.style.filter = "brightness(100%)";
+                for(i = 0; i < news.length; i++)
+                    {
+                    news[i].style.transition = "left 1.5s, transform 1.5s";
+                    news[i].style.left = parseFloat(news[i].style.left.replace("%", "")) + 65 + "%";
+                    if(news[i].style.left == "19.5%")
+                        {
+                        news[i].style.transform = "scale(1, 1) translateY(-50%)";
+                        date[i].style.fontSize = "20px";
+                        nTitle[i].style.fontSize = "25px";
+                        }
+                    else if(news[i].style.left == "84.5%")
+                        {
+                        news[i].style.transform = "scale(.9, .9) translateY(-50%)";
+                        date[i].style.fontSize = "17px";
+                        nTitle[i].style.fontSize = "22px";
+                        }
+                    if(news[0].style.left === "19.5%")
+                        {
+                        btnB.style.filter = "brightness(50%)";
+                        }
+                    }
+                }
+            }
+
+        for(i = 0; i < leaders.length; i++)
+            {
+            leaders[i].style.right = 25 - 15 * i + "%";
+            if(parseFloat(leaders[i].style.right.replace("%", "")) < 25)
+                {
+                leaders[i].style.transform = "scale(0.8, 0.8)";
+                leaders[i].style.opacity = 0;
+                }
+            }
+
+        function GO_next()
+            {
+            if(parseFloat(leaders[leaders.length - 1].style.right.replace("%", "")) < 25)
+                {
+                console.log(leader.innerHTML)
+                for(i = 0; i < leaders.length; i++)
+                    {
+
+                    leaders[i].style.opacity = 0;
+                    leaders[i].style.transition = "right 1.5s, transform 1.5s, opacity 1.5s";
+                    leaders[i].style.right = parseFloat(leaders[i].style.right.replace("%", "")) + 15 + "%";
+                    if(leaders[i].style.right == "25%")
+                        {
+                        leaders[i].style.opacity = 1;
+                        leaders[i].style.transform = "scale(1, 1)";
+                        }
+                    if(i == 0 && leaders[0].style.opacity == 1)
+                        {
+                        leader.innerHTML = "Arlo";
+                        }
+                    else if(i == 1 && leaders[1].style.opacity == 1)
+                        {
+                        leader.innerHTML = "Cliff";
+                        }
+                    else if(i == 2 && leaders[2].style.opacity == 1)
+                        {
+                        leader.innerHTML = "Ciera";
+                        }
+                    }
+                }
+            }
+
+        function GO_back()
+            {
+            if(parseFloat(leaders[0].style.right.replace("%", "")) > 25)
+                {
+                for(i = 0; i < leaders.length; i++)
+                    {
+                    console.log(leader.innerHTML)
+                    leaders[i].style.transition = "right 1.5s, transform 1.5s, opacity 1.5s";
+                    leaders[i].style.right = parseFloat(leaders[i].style.right.replace("%", "")) - 15 + "%";
+                    if(leaders[i].style.right == "10%")
+                        {
+                        leaders[i].style.opacity = 0;
+                        leaders[i].style.transform = "scale(0.8, 0.8)";
+                        }
+                    if(leaders[i].style.right == "25%")
+                        {
+                        leaders[i].style.opacity = 1;
+                        }
+                    if(i == 0 && leaders[0].style.opacity == 1)
+                        {
+                        leader.innerHTML = "Arlo";
+                        }
+                    else if(i == 1 && leaders[1].style.opacity == 1)
+                        {
+                        leader.innerHTML = "Cliff";
+                        }
+                    else if(i == 2 && leaders[2].style.opacity == 1)
+                        {
+                        leader.innerHTML = "Ciera";
+                        }
+                    }
+                }
+            }
+
+
+
+        function reveal()
+            {
+            var windowHeight = window.innerHeight;
+            var elementTop = sec2.getBoundingClientRect().top;
+            var elementVisible = 150;
+            if(elementTop < windowHeight - elementVisible)
+                {
+                sec2.classList.add("active");
+                }
+            else
+                {
+                sec2.classList.remove("active");
+                }
+            }
+
+        function reveal_sec5()
+            {
+            var windowHeight = window.innerHeight;
+            var elementTop = sec5.getBoundingClientRect().top;
+            var elementVisible = 150;
+            if(elementTop < windowHeight - elementVisible)
+                {
+                Items.classList.add("active2");
+                }
+            else
+                {
+                Items.classList.remove("active2");
+                }
+            }
+
+        function scrollEvents()
+            {
+            reveal();
+            reveal_sec5()
+            }
+        window.addEventListener('scroll', scrollEvents);
+
+
+
+    </script>
+</body>
+</html>
